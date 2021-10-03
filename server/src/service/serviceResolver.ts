@@ -1,16 +1,13 @@
-import { ApolloError } from "apollo-server-express";
+import { IResolvers } from "apollo-server";
 
-const ServiceResolvers = {
+const ServiceResolvers: IResolvers = {
   Query: {
-    getAllUsers: async (_: any, args: any) => {
-      try {
-        const mockUsers = [{ name: "xyz" }, { name: "abc" }];
-        return mockUsers;
-      } catch (error : any) {
-        throw new ApolloError(error);
-      }
-    },
-  },
+    getIPInfo: async (_: any, args: any, { dataSources }) => {
+        const res = await dataSources.whoisAPI.getIPInfo(args.address)
+        console.log(res)
+        return {createdDate: res.WhoisRecord.createdDate}
+    }
+  }
 };
 
 export default ServiceResolvers;

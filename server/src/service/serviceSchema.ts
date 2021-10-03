@@ -1,10 +1,13 @@
 import { gql } from "apollo-server-express";
 
 export const ServiceTypeDefs = gql`
-  type User {
-    name: String
+
+  type IPInfo {
+    createdDate: String
   }
+
   type Query {
-    getAllUsers: [User]
+    getIPInfo(address : String!): IPInfo
   }
+
 `;
