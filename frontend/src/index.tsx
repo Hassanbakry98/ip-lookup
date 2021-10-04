@@ -3,16 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { ApolloClient, ApolloProvider } from "@apollo/client";
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import { GET_IP_INFO } from "./graphql"
 
-
-
+import { graphql } from 'graphql';
 const localGraphQL = "http://localhost:3000/graphql";
 
 const client = new ApolloClient({
-  uri: localGraphQL
+  uri: localGraphQL,
+  cache: new InMemoryCache()
 });
-
 
 ReactDOM.render(
   <React.StrictMode>

@@ -1,37 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { ApolloProvider, Query } from "react-apollo";
+
 import { useLazyQuery } from "@apollo/client";
 import { GET_IP_INFO } from "./graphql";
-import { useGetIpInfo } from './useRequest';
-
-
+import IpInfo from './components/Ipinfo';
 
 
 function App() {
 
-  const [getData, { loading , data }] = useLazyQuery(GET_IP_INFO);
-  const [expiresAt, setExpiresAt] = React.useState(Number);
-  // const { loading, error, data } = useGetIpInfo(GET_IP_INFO);
+  const [address, setAddress] = React.useState<string>('');
 
-
-  const handleSubmit = (e: React.SyntheticEvent) => {
-    
-  }
+  const [getData, {called, loading , data }] = useLazyQuery(GET_IP_INFO);
 
   return (
       <div className="App">
-        <form onSubmit={handleSubmit}>
-          <label>
-            IP/Domain:
-            <input type="text" name="address" />
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
-        <button onClick={() => getData()}> Submit </button>
-
-        <h3>Created at: {data} </h3>
+        <label>
+          IP/Domain:
+        </label>
+        <input type="text" name="address" onChange={e => setAddress(e.target.value)} />
+        <button onClick={() => getData({variables: {address: address}})}>
+           Submit 
+        </button>
+        <IpInfo data={data? data.getIPInfo.createdDate : ' '} >
+        </IpInfo>
       </div>
   );
 }

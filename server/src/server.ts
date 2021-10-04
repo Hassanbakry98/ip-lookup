@@ -7,7 +7,7 @@ import helmet from "helmet";
 import { schema } from "./schema";
 import WhoisAPI from "./service/serviceAPI"
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 7777;
 const app = express();
 
 app.use(cors());
@@ -34,5 +34,5 @@ startServer()
 const httpServer = createServer(app);
 
 httpServer.listen({ port: PORT }, (): void =>
-  console.log(`🚀GraphQL-Server is running on http://localhost:3000/graphql`)
+  console.log(`🚀GraphQL-Server is running on http://localhost:7777/graphql`)
 );

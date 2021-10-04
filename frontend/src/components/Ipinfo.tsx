@@ -1,17 +1,17 @@
 import * as React from "react";
-import { Ipinfo } from "../types/Ipinfo"
+import { useLazyQuery, useQuery } from "@apollo/client"
+import { GET_IP_INFO } from "../graphql"
 
 type Props = {
-  ipinfo: Ipinfo;
+  data: string;
 };
 
-const IpInfo: React.FC<Props> = ({ ipinfo }) => {
-  const { createdDate } = ipinfo;
+const IpInfo: React.FC<Props> = ({ data }) => {
 
   return (
     <div className="card">
       <h1> Lorem Ipsum </h1>
-      <span> Created date: {createdDate} </span>
+      <span> Created date: {data} </span>
     </div>
   );
 };
