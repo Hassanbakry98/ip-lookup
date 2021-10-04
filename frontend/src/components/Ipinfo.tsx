@@ -18,14 +18,6 @@ function createRow(
   return { name, calories };
 }
 
-const rows = [
-  createRow('Frozen yoghurt', '159'),
-  createRow('Ice cream sandwich', '237'),
-  createRow('Eclair', '262'),
-  createRow('Cupcake', '305'),
-  createRow('Gingerbread', '356'),
-];
-
 const IpInfo: React.FC<Props> = ({ data }) => {
 
   return (
