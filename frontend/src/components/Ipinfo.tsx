@@ -1,18 +1,76 @@
 import * as React from "react";
-import { useLazyQuery, useQuery } from "@apollo/client"
-import { GET_IP_INFO } from "../graphql"
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
 type Props = {
-  data: string;
+  data: any;
 };
+
+function createRow(
+  name: string,
+  calories: string
+) {
+  return { name, calories };
+}
+
+const rows = [
+  createRow('Frozen yoghurt', '159'),
+  createRow('Ice cream sandwich', '237'),
+  createRow('Eclair', '262'),
+  createRow('Cupcake', '305'),
+  createRow('Gingerbread', '356'),
+];
 
 const IpInfo: React.FC<Props> = ({ data }) => {
 
   return (
-    <div className="card">
-      <h1> Lorem Ipsum </h1>
-      <span> Created date: {data} </span>
-    </div>
+    <TableContainer sx={ {width: 400 } } component={Paper}>
+      <Table sx={{ minWidth: 400}} aria-label="simple table">
+        <TableBody>
+          <TableRow>
+            <TableCell component="th" scope="row">
+              Created at:
+            </TableCell>
+            <TableCell>{data?.getIPInfo?.createdDate || ' '}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell component="th" scope="row">
+              Updated at:
+            </TableCell>
+            <TableCell>{data?.getIPInfo?.updatedDate || ' '}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell component="th" scope="row">
+              Expires at:
+            </TableCell>
+            <TableCell>{data?.getIPInfo?.expiresDate || ' ' }</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell component="th" scope="row">
+              Organization: 
+            </TableCell>
+            <TableCell>{data?.getIPInfo?.organization || ' '}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell component="th" scope="row">
+              State\City:
+            </TableCell>
+            <TableCell>{data?.getIPInfo?.state || ' '}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell component="th" scope="row">
+              Country:
+            </TableCell>
+            <TableCell>{data?.getIPInfo?.country || ' '}</TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+  </TableContainer>
   );
 };
 
